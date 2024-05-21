@@ -1,11 +1,16 @@
 import { Sequelize } from "sequelize";
 import { config } from "./libs/config";
+let sequelize = null;
 
-const db = new Sequelize({
-  database: config.database,
-  username: config.username,
-  password: config.password,
-  params: config.params,
-});
+export function db() {
+  if (!sequelize) {
+    sequelize = new Sequelize(
+      config.database,
+      config.username,
+      config.password,
+      config.params
+    );
+  }
 
-export default db;
+  return sequelize;
+}
