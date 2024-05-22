@@ -1,6 +1,6 @@
 import express from "express";
-import { getNTask } from "./routes/index";
-import { getTaskList } from "./routes/task";
+import { nTaskRoute } from "./routes/index.js";
+import { TaskRoute } from "./routes/task.js";
 
 const PORT = 3000;
 const app = express();
@@ -8,8 +8,8 @@ const app = express();
 // Return as formatted and tabbed JSON output
 app.set("json spaces", 4);
 
-app.get("/", getNTask);
+app.get("/", nTaskRoute);
 
-app.get("/task", getTaskList);
+app.get("/tasks", TaskRoute);
 
 app.listen(PORT, () => console.log(`NTask API - Port ${PORT}`));
