@@ -1,42 +1,57 @@
-export function UsersModel(sequelize, DataType) {
-  const Users = sequelize.define(
-    "Users",
-    {
-      id: {
-        type: DataType.INTEGER,
-        primaryKey: true,
-        autoIncrement: true,
-      },
-      name: {
-        type: DataType.STRING,
-        allowNull: false,
-        validate: {
-          notEmpty: true,
-        },
-      },
-      password: {
-        type: DataType.STRING,
-        allowNull: false,
-        validate: {
-          notEmpty: true,
-        },
-      },
-      email: {
-        type: DataType.STRING,
-        unique: true,
-        allowNull: false,
-        validate: {
-          notEmpty: true,
-        },
+// import bcrypt from "bcrypt";
+const bcrypt = require("bcrypt");
+const { DataTypes } = require("sequelize");
+const sequelize = require("../db");
+
+const User = sequelize.define(
+  "User",
+  {
+    id: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      autoIncrement: true,
+    },
+    name: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        notEmpty: true,
       },
     },
-    {
-      classMethods: {
-        associate: (models) => {
-          Users.hasMany(models.Task);
-        },
+    password: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        notEmpty: true,
       },
-    }
-  );
-  return Users;
-}
+    },
+    email: {
+      type: DataTypes.STRING,
+      unique: true,
+      allowNull: false,
+      validate: {
+        notEmpty: true,
+      },
+    },
+  },
+  // {
+  //   hooks: {
+  //     beforeCreate: (user) => {
+  //       const salt = bcrypt.genSaltSync();
+  //       user.password = bcrypt.hashSync(user.password, salt);
+  //     },
+  //   },
+  // },
+  {
+    classMethods: {
+      associate: (models) => {
+        Users.hasMany(models.Task);
+      },
+      // isPassword: (encodePassword, password) => {
+      //   return bcrypt.compareSync(password, encodePassword);
+      // },
+    },
+  }
+);
+
+module.exports = User;

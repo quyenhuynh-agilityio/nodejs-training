@@ -1,29 +1,29 @@
 module.exports = (app) => {
-  const Task = require("../models/tasks");
-  app.post("/tasks", async (req, res) => {
+  const User = require("../models/users");
+  app.post("/users", async (req, res) => {
     console.log("req.body", req.body);
     try {
-      const user = await Task.create(req.body);
+      const user = await User.create(req.body);
       res.status(201).json(user);
     } catch (error) {
       res.status(400).json({ error: error.message });
     }
   });
 
-  // Get all tasks
-  app.get("/tasks", async (req, res) => {
+  // Get all users
+  app.get("/users", async (req, res) => {
     try {
-      const tasks = await Task.findAll();
-      res.status(200).json(tasks);
+      const users = await User.findAll();
+      res.status(200).json(users);
     } catch (error) {
       res.status(500).json({ error: error.message });
     }
   });
 
   // Get a user by ID
-  app.get("/tasks/:id", async (req, res) => {
+  app.get("/users/:id", async (req, res) => {
     try {
-      const user = await Task.findByPk(req.params.id);
+      const user = await User.findByPk(req.params.id);
       if (user) {
         res.status(200).json(user);
       } else {
@@ -35,13 +35,13 @@ module.exports = (app) => {
   });
 
   // Update a user by ID
-  app.put("/tasks/:id", async (req, res) => {
+  app.put("/users/:id", async (req, res) => {
     try {
-      const [updated] = await Task.update(req.body, {
+      const [updated] = await User.update(req.body, {
         where: { id: req.params.id },
       });
       if (updated) {
-        const updatedUser = await Task.findByPk(req.params.id);
+        const updatedUser = await User.findByPk(req.params.id);
         res.status(200).json(updatedUser);
       } else {
         res.status(404).json({ error: "User not found" });
@@ -52,9 +52,9 @@ module.exports = (app) => {
   });
 
   // Delete a user by ID
-  app.delete("/tasks/:id", async (req, res) => {
+  app.delete("/users/:id", async (req, res) => {
     try {
-      const deleted = await Task.destroy({
+      const deleted = await User.destroy({
         where: { id: req.params.id },
       });
       if (deleted) {

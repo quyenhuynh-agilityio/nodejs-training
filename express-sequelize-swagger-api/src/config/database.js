@@ -1,13 +1,10 @@
 const { Sequelize } = require("sequelize");
-const config = require("./libs/config");
 
 // Initialize Sequelize to use SQLite
-const sequelize = new Sequelize(
-  config.database,
-  config.username,
-  config.password,
-  config.params
-);
+const sequelize = new Sequelize({
+  dialect: "sqlite",
+  storage: "./database.sqlite",
+});
 
 // Test the database connection
 sequelize

@@ -1,33 +1,36 @@
-export function TasksModel(sequelize, DataType) {
-  const Tasks = sequelize.define(
-    "Tasks",
-    {
-      id: {
-        type: DataType.INTEGER,
-        primaryKey: true,
-        autoIncrement: true,
-      },
-      title: {
-        type: DataType.STRING,
-        allowNull: false,
+const { DataTypes } = require("sequelize");
+const sequelize = require("../db");
 
-        validate: {
-          notEmpty: true,
-        },
-      },
-      done: {
-        type: DataType.BOOLEAN,
-        allowNull: false,
-        defaultValue: false,
+const Task = sequelize.define(
+  "Task",
+  {
+    // Define model attributes
+    id: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      autoIncrement: true,
+    },
+    title: {
+      type: DataTypes.STRING,
+      allowNull: false,
+
+      validate: {
+        notEmpty: true,
       },
     },
-    {
-      classMethods: {
-        associate: (models) => {
-          Tasks.belongsTo(models.Users);
-        },
+    done: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+      defaultValue: false,
+    },
+  },
+  {
+    classMethods: {
+      associate: (models) => {
+        Tasks.belongsTo(models.Users);
       },
-    }
-  );
-  return Tasks;
-}
+    },
+  }
+);
+
+module.exports = Task;

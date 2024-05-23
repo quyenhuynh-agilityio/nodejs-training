@@ -1,14 +1,16 @@
-import express from "express";
-import { nTaskRoute } from "./routes/index.js";
-import { TaskRoute } from "./routes/task.js";
-import { db } from "./db.js";
+const express = require("express");
+const sequelize = require("./db");
+const usersRoute = require("./routes/users");
+const tasksRoute = require("./routes/task");
 
 const PORT = 3000;
 const app = express();
+// Middleware to parse JSON
+app.use(express.json());
 
 // Sync database and start server
-db()
-  .sequelize.sync({ alter: true })
+sequelize
+  .sync()
   .then(() => {
     console.log("Database synced");
     app.listen(8000, () => {
@@ -21,9 +23,7 @@ db()
 
 // Return as formatted and tabbed JSON output
 app.set("json spaces", 4);
-
-app.get("/", nTaskRoute);
-
-app.get("/tasks", TaskRoute);
+usersRoute(app);
+tasksRoute(app);
 
 app.listen(PORT, () => console.log(`NTask API - Port ${PORT}`));
