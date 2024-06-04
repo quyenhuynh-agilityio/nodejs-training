@@ -44,6 +44,7 @@ export const getPokemons = async (
     res.status((error as ErrorMessage).status).json(error);
   }
 };
+
 export const updateAPokemon = async (
   req: Request,
   res: Response,

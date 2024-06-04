@@ -6,6 +6,7 @@ import { sequelize } from "./configs/database";
 
 // Routes
 import { PokemonRoute } from "./routes/pokemon";
+import { TypeRoute } from "./routes/type";
 
 const app = express();
 const PORT = 3000;
@@ -14,6 +15,9 @@ app.use(bodyParser.json());
 
 // CRUD operations for Pokemon
 PokemonRoute(app);
+
+// CRUD operations for Pokemon Type
+TypeRoute(app);
 
 // Sync database and start server
 sequelize
