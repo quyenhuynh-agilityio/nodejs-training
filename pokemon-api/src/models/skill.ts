@@ -38,7 +38,4 @@ export class Skill extends Model {
     allowNull: false,
   })
   pokemonId!: number;
-
-  @BelongsTo(() => Pokemon)
-  pokemon!: Pokemon;
 }

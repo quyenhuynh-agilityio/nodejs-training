@@ -8,7 +8,7 @@ import { sequelize } from "./configs/database";
 import { PokemonRoute } from "./routes/pokemon";
 import { TypeRoute } from "./routes/type";
 
-const app = express();
+export const app = express();
 const PORT = 3000;
 
 app.use(bodyParser.json());

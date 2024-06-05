@@ -59,7 +59,7 @@ export const createPokemon = async (payload: PokemonTypes) => {
 };
 export const updatePokemon = async (
   id: string,
-  body: Pokemon,
+  body: PokemonTypes,
 ): Promise<Pokemon> => {
   const { name, types, levels, skills } = body;
 

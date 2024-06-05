@@ -12,7 +12,7 @@ export interface PokemonSkillsTypes {
 
 export interface PokemonTypes {
   name: string;
-  types: PokemonEnergyTypes[];
-  levels: PokemonLevelsTypes[];
-  skills: PokemonSkillsTypes[];
+  types: string[];
+  levels: number[];
+  skills: string[];
 }
