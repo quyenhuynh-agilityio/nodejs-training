@@ -11,6 +11,6 @@ import { Skill } from "../models/skill";
 // Initialize Sequelize to use SQLite
 export const sequelize = new Sequelize({
   dialect: "sqlite",
-  storage: `../database.sqlite`,
+  storage: `./database.sqlite`,
   models: [Pokemon, Type, Level, PokemonType, PokemonLevel, Skill],
 });

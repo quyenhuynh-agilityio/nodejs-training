@@ -26,7 +26,7 @@ export const getPokemonById = async (pokemonId: number) => {
   return pokemon;
 };
 
-export const createPokemon = async (payload: PokemonTypes) => {
+export const createPokemon = async (payload?: PokemonTypes) => {
   if (!payload) {
     // Return error if not have payload
     throw {
@@ -65,6 +65,7 @@ export const createPokemon = async (payload: PokemonTypes) => {
     return pokemon;
   }
 };
+
 export const updatePokemon = async (
   id: string,
   body: PokemonTypes,
