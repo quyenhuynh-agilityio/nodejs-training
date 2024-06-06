@@ -27,10 +27,10 @@ export class Level extends Model {
   id!: number;
 
   @Column({
-    type: DataType.INTEGER,
+    type: DataType.STRING,
     allowNull: false,
   })
-  level!: number;
+  level!: string;
 
   @BelongsToMany(() => Pokemon, () => PokemonLevel)
   pokemons!: Pokemon[];

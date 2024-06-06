@@ -5,5 +5,5 @@ import { getAllPokemonByType } from "../controllers/type";
 
 // pokemon router
 export const TypeRoute = (app: Application) => {
-  app.route("/types").get(getAllPokemonByType);
+  app.route("/pokemon/type").get(getAllPokemonByType);
 };

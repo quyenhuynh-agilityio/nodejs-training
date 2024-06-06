@@ -8,6 +8,7 @@ import {
   createPokemon,
   deletePokemon,
   getAllPokemon,
+  getPokemonById,
   updatePokemon,
 } from "../services/pokemon";
 
@@ -36,6 +37,21 @@ export const getPokemons = async (
 ): Promise<void> => {
   try {
     const result = await getAllPokemon();
+
+    // Return result create pokemon item
+    res.status(RESPONSE_STATUS.OK).json(result);
+  } catch (error) {
+    // Return error create pokemon item
+    res.status((error as ErrorMessage).status).json(error);
+  }
+};
+export const getAPokemonById = async (
+  req: Request,
+  res: Response,
+): Promise<void> => {
+  try {
+    const pokemonId = parseInt(req.params.id, 10);
+    const result = await getPokemonById(pokemonId);
 
     // Return result create pokemon item
     res.status(RESPONSE_STATUS.OK).json(result);

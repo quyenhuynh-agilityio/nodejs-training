@@ -18,6 +18,14 @@ export const getAllPokemon = async () => {
   return pokemons;
 };
 
+export const getPokemonById = async (pokemonId: number) => {
+  const pokemon = await Pokemon.findByPk(pokemonId, {
+    include: [Type, Level, Skill],
+  });
+
+  return pokemon;
+};
+
 export const createPokemon = async (payload: PokemonTypes) => {
   if (!payload) {
     // Return error if not have payload

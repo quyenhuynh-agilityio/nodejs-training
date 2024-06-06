@@ -4,6 +4,7 @@ import { Application } from "express";
 import {
   createAPokemon,
   deleteAPokemon,
+  getAPokemonById,
   getPokemons,
   updateAPokemon,
 } from "../controllers/pokemon";
@@ -15,5 +16,9 @@ export const PokemonRoute = (app: Application) => {
   app.route("/pokemons").get(getPokemons).post(createAPokemon);
 
   // Update/Delete a Pokemon
-  app.route("/pokemons/:id").put(updateAPokemon).delete(deleteAPokemon);
+  app
+    .route("/pokemons/:id")
+    .get(getAPokemonById)
+    .put(updateAPokemon)
+    .delete(deleteAPokemon);
 };
