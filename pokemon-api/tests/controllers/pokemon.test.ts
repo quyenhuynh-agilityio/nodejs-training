@@ -22,10 +22,9 @@ describe("createAPokemon", () => {
 
   it("should create a new pokemon and return the result", async () => {
     const payload = {
-      id: 1,
       name: "Pikachu",
       types: ["Electric"],
-      levels: [5],
+      levels: ["Basic"],
       skills: ["Thunder Shock"],
     };
     req.body = payload;
@@ -34,11 +33,12 @@ describe("createAPokemon", () => {
     (createPokemon as jest.Mock).mockResolvedValue(createdPokemon);
 
     await createAPokemon(req as Request, res as Response);
-
+    const result = createPokemon(payload);
     expect(createPokemon).toHaveBeenCalledWith(payload);
     expect(res.status).toHaveBeenCalledWith(RESPONSE_STATUS.CREATED);
 
     expect(res.json).toHaveBeenCalledTimes(1);
+    expect(res.json).toHaveBeenCalledWith(result);
   });
 
   it("should return an error if createPokemon throws an error", async () => {

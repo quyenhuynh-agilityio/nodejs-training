@@ -4,9 +4,11 @@ import {
   createPokemon,
   deletePokemon,
   getAllPokemon,
+  getPokemonById,
   updatePokemon,
 } from "../../src/services/pokemon";
 import { ERR_CODES, MESSAGES, RESPONSE_STATUS } from "../../src/constants";
+import { getAPokemonById } from "../../src/controllers/pokemon";
 
 beforeAll(async () => {
   await sequelize.sync({ force: true });
@@ -34,23 +36,20 @@ describe("Pokemon API", () => {
 
   it("should create new a pokemon", async () => {
     const createdPokemon = await createPokemon(newPokemon);
-    console.log("newPokemon", newPokemon);
-
-    console.log("createdPokemon", createdPokemon);
-
     expect(createdPokemon.name).toBe("Pokemon");
   });
 
-  // it("Invalid payload", async () => {
-  //   // Call the function with empty payload
-  //   await expect(createPokemon()).rejects.toEqual({
-  //     message: MESSAGES.INVALID_PAYLOAD,
-  //     status: RESPONSE_STATUS.INVALID_PARAM,
-  //     errorCode: ERR_CODES.EC_BAD_REQUEST,
-  //   });
-
-  //   // Assertions
-  //   expect(createPokemon(newPokemon)).not.toHaveBeenCalled(); // Ensure Pokemon.create is not called
+  it("should throw an error if payload is not provided", async () => {
+    try {
+      await createPokemon(undefined);
+    } catch (error) {
+      expect(error).toEqual({
+        message: MESSAGES.INVALID_PAYLOAD,
+        status: RESPONSE_STATUS.INVALID_PARAM,
+        errorCode: ERR_CODES.EC_BAD_REQUEST,
+      });
+    }
+  });
 
   it("should update an existing Pokemon", async () => {
     const updatedData = {
@@ -63,9 +62,21 @@ describe("Pokemon API", () => {
     expect(updatedPokemon.name).toBe("Boguerisse");
   });
 
-  // it("should delete a Pokemon", async () => {
-  //   await deletePokemon("1");
-  //   // const pokemon = await getAllPokemon("1");
-  //   // expect(pokemon).toBeNull();
+  // it("should throw an error if payload is not provided", async () => {
+  //   try {
+  //     await updatePokemon("1", undefined);
+  //   } catch (error) {
+  //     expect(error).toEqual({
+  //       message: MESSAGES.INVALID_PAYLOAD,
+  //       status: RESPONSE_STATUS.INVALID_PARAM,
+  //       errorCode: ERR_CODES.EC_BAD_REQUEST,
+  //     });
+  //   }
   // });
+
+  it("should delete a Pokemon", async () => {
+    await deletePokemon("1");
+    const pokemon = await getPokemonById(1);
+    expect(pokemon).toBeNull();
+  });
 });
