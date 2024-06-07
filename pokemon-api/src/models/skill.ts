@@ -38,6 +38,12 @@ export class Skill extends Model {
   })
   score!: number;
 
+  @Column({
+    type: DataType.BOOLEAN,
+    allowNull: false,
+  })
+  plus!: boolean;
+
   @ForeignKey(() => Pokemon)
   @Column({
     type: DataType.INTEGER,

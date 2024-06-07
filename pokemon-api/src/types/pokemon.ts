@@ -10,6 +10,7 @@ export interface PokemonEnergyTypes {
 export interface PokemonSkillsTypes {
   name: string;
   score: number;
+  plus: boolean;
 }
 
 export interface PokemonTypes {

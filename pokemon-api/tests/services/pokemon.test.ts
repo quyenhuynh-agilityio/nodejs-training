@@ -32,10 +32,12 @@ const newPokemon = {
     {
       name: "Thunder Shock",
       score: 40,
+      plus: false,
     },
     {
       name: "Quick Attack",
       score: 50,
+      plus: true,
     },
   ],
 };
@@ -78,10 +80,12 @@ describe("Pokemon API", () => {
         {
           name: "Thunder Shock",
           score: 40,
+          plus: false,
         },
         {
           name: "Quick Attack",
           score: 50,
+          plus: true,
         },
       ],
     };

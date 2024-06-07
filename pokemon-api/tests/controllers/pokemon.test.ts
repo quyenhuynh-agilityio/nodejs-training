@@ -44,10 +44,12 @@ describe("Pokemon Controller", () => {
           {
             name: "Thunder Shock",
             score: 40,
+            plus: false,
           },
           {
             name: "Quick Attack",
             score: 50,
+            plus: true,
           },
         ],
       },
@@ -78,10 +80,12 @@ describe("Pokemon Controller", () => {
           {
             name: "Thunder Shock",
             score: 40,
+            plus: false,
           },
           {
             name: "Quick Attack",
             score: 50,
+            plus: true,
           },
         ],
       };

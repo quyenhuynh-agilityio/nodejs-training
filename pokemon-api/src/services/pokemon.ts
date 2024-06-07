@@ -65,6 +65,7 @@ export const createPokemon = async (payload?: PokemonTypes) => {
         await Skill.create({
           name: skill.name,
           score: skill.score,
+          plus: skill.plus || false,
           pokemonId: pokemon.id,
         });
       }
@@ -126,6 +127,7 @@ export const updatePokemon = async (
         await Skill.create({
           name: skill.name,
           score: skill.score,
+          plus: skill.plus,
           pokemonId: pokemon.id,
         });
       }),
