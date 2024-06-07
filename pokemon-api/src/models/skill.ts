@@ -14,7 +14,7 @@ import { Pokemon } from "./pokemon";
 
 // Skill Model: Represents the skills a Pokémon can have
 @Table({
-  timestamps: true,
+  timestamps: false,
   tableName: "skills",
 })
 export class Skill extends Model {

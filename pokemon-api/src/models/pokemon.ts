@@ -18,7 +18,7 @@ import { PokemonLevel } from "./pokemonLevel";
 
 // Pokemon Model: This represents the Pokémon entity
 @Table({
-  timestamps: true,
+  timestamps: false,
   tableName: "pokemons",
 })
 export class Pokemon extends Model {

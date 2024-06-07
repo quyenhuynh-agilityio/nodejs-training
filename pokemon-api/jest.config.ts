@@ -28,7 +28,7 @@ const config: JestConfigWithTsJest = {
     "interfaces",
     "jestGlobalMocks.ts",
     ".module.ts",
-    "<rootDir>/src/main.ts",
+    "<rootDir>/src/index.ts",
     "<rootDir>/src/constants/*",
     "<rootDir>/src/vite-env.d.ts",
     ".mock.ts",

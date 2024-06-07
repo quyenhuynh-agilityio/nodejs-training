@@ -14,7 +14,7 @@ import { PokemonType } from "./pokemonType";
 
 // Type Model: Represents the type of a Pokémon (e.g., Fire, Water).
 @Table({
-  timestamps: true,
+  timestamps: false,
   tableName: "types",
 })
 export class Type extends Model {
