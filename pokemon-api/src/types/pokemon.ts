@@ -1,5 +1,6 @@
 export interface PokemonLevelsTypes {
   level: string;
+  hp: number;
 }
 
 export interface PokemonEnergyTypes {
@@ -8,11 +9,12 @@ export interface PokemonEnergyTypes {
 
 export interface PokemonSkillsTypes {
   name: string;
+  score: number;
 }
 
 export interface PokemonTypes {
   name: string;
   types: string[];
-  levels: string[];
-  skills: string[];
+  levels: PokemonLevelsTypes[];
+  skills: PokemonSkillsTypes[];
 }

@@ -8,7 +8,6 @@ import {
   updatePokemon,
 } from "../../src/services/pokemon";
 import { ERR_CODES, MESSAGES, RESPONSE_STATUS } from "../../src/constants";
-import { getAPokemonById } from "../../src/controllers/pokemon";
 
 beforeAll(async () => {
   await sequelize.sync({ force: true });
@@ -23,8 +22,22 @@ afterAll(async () => {
 const newPokemon = {
   name: "Pokemon",
   types: ["Water"],
-  levels: ["Basic"],
-  skills: ["Thunder Shock", "Quick Attack"],
+  levels: [
+    {
+      level: "Basic",
+      hp: 90,
+    },
+  ],
+  skills: [
+    {
+      name: "Thunder Shock",
+      score: 40,
+    },
+    {
+      name: "Quick Attack",
+      score: 50,
+    },
+  ],
 };
 
 describe("Pokemon API", () => {
@@ -55,8 +68,22 @@ describe("Pokemon API", () => {
     const updatedData = {
       name: "Boguerisse",
       types: ["Fire"],
-      levels: ["basic"],
-      skills: ["Thunder Shock", "Quick Attack"],
+      levels: [
+        {
+          level: "Basic",
+          hp: 90,
+        },
+      ],
+      skills: [
+        {
+          name: "Thunder Shock",
+          score: 40,
+        },
+        {
+          name: "Quick Attack",
+          score: 50,
+        },
+      ],
     };
     const updatedPokemon = await updatePokemon("1", updatedData);
     expect(updatedPokemon.name).toBe("Boguerisse");

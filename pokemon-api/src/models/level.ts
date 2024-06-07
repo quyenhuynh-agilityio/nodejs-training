@@ -32,6 +32,12 @@ export class Level extends Model {
   })
   level!: string;
 
+  @Column({
+    type: DataType.INTEGER,
+    allowNull: false,
+  })
+  hp!: number;
+
   @BelongsToMany(() => Pokemon, () => PokemonLevel)
   pokemons!: Pokemon[];
 }

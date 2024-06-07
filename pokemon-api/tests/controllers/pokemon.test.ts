@@ -34,8 +34,22 @@ describe("Pokemon Controller", () => {
       body: {
         name: "Pikachu",
         types: ["Electric"],
-        levels: ["Basic"],
-        skills: ["Thunder Shock"],
+        levels: [
+          {
+            level: "Basic",
+            hp: 90,
+          },
+        ],
+        skills: [
+          {
+            name: "Thunder Shock",
+            score: 40,
+          },
+          {
+            name: "Quick Attack",
+            score: 50,
+          },
+        ],
       },
     };
 
@@ -54,8 +68,22 @@ describe("Pokemon Controller", () => {
       const payload = {
         name: "Pikachu",
         types: ["Electric"],
-        levels: ["Basic"],
-        skills: ["Thunder Shock"],
+        levels: [
+          {
+            level: "Basic",
+            hp: 90,
+          },
+        ],
+        skills: [
+          {
+            name: "Thunder Shock",
+            score: 40,
+          },
+          {
+            name: "Quick Attack",
+            score: 50,
+          },
+        ],
       };
       req.body = payload;
 
@@ -76,7 +104,16 @@ describe("Pokemon Controller", () => {
         name: "Pikachu",
         types: ["Electric"],
         levels: [5],
-        skills: ["Thunder Shock"],
+        skills: [
+          {
+            name: "Thunder Shock",
+            score: 40,
+          },
+          {
+            name: "Quick Attack",
+            score: 50,
+          },
+        ],
       };
       req.body = payload;
 
@@ -104,15 +141,43 @@ describe("Pokemon Controller", () => {
           id: 1,
           name: "Pikachu",
           types: ["Electric"],
-          levels: [5],
-          skills: ["Thunder Shock"],
+          levels: [
+            {
+              level: "Basic",
+              hp: 90,
+            },
+          ],
+          skills: [
+            {
+              name: "Thunder Shock",
+              score: 40,
+            },
+            {
+              name: "Quick Attack",
+              score: 50,
+            },
+          ],
         },
         {
           id: 2,
           name: "Charmander",
           types: ["Fire"],
-          levels: [5],
-          skills: ["Ember"],
+          levels: [
+            {
+              level: "Basic",
+              hp: 90,
+            },
+          ],
+          skills: [
+            {
+              name: "Thunder Shock",
+              score: 40,
+            },
+            {
+              name: "Quick Attack",
+              score: 50,
+            },
+          ],
         },
       ];
 
@@ -148,15 +213,34 @@ describe("Pokemon Controller", () => {
           id: 1,
           name: "Pikachu",
           types: ["Electric"],
-          levels: [5],
+          levels: [
+            {
+              level: "Basic",
+              hp: 90,
+            },
+          ],
           skills: ["Thunder Shock"],
         },
         {
           id: 2,
           name: "Charmander",
           types: ["Fire"],
-          levels: [5],
-          skills: ["Ember"],
+          levels: [
+            {
+              level: "Basic",
+              hp: 90,
+            },
+          ],
+          skills: [
+            {
+              name: "Thunder Shock",
+              score: 40,
+            },
+            {
+              name: "Quick Attack",
+              score: 50,
+            },
+          ],
         },
       ];
 
@@ -191,8 +275,22 @@ describe("Pokemon Controller", () => {
         id: "1",
         name: "Pikachu",
         types: ["Electric"],
-        levels: [5],
-        skills: ["Thunder Shock"],
+        levels: [
+          {
+            level: "Basic",
+            hp: 90,
+          },
+        ],
+        skills: [
+          {
+            name: "Thunder Shock",
+            score: 40,
+          },
+          {
+            name: "Quick Attack",
+            score: 50,
+          },
+        ],
       };
 
       (updatePokemon as jest.Mock).mockResolvedValue(updatedPokemon);
@@ -214,8 +312,22 @@ describe("Pokemon Controller", () => {
       const payload = {
         name: "Pikachu",
         types: ["Electric"],
-        levels: [5],
-        skills: ["Thunder Shock"],
+        levels: [
+          {
+            level: "Basic",
+            hp: 90,
+          },
+        ],
+        skills: [
+          {
+            name: "Thunder Shock",
+            score: 40,
+          },
+          {
+            name: "Quick Attack",
+            score: 50,
+          },
+        ],
       };
 
       req.body = payload;
@@ -237,8 +349,22 @@ describe("Pokemon Controller", () => {
         id: "1",
         name: "Pikachu",
         types: ["Electric"],
-        levels: [5],
-        skills: ["Thunder Shock"],
+        levels: [
+          {
+            level: "Basic",
+            hp: 90,
+          },
+        ],
+        skills: [
+          {
+            name: "Thunder Shock",
+            score: 40,
+          },
+          {
+            name: "Quick Attack",
+            score: 50,
+          },
+        ],
       };
 
       (deletePokemon as jest.Mock).mockResolvedValue(updatedPokemon);

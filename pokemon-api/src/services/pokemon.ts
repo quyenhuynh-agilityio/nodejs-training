@@ -49,17 +49,24 @@ export const createPokemon = async (payload?: PokemonTypes) => {
     }
 
     if (levels && levels.length > 0) {
-      for (const level of levels) {
-        const [lvl] = await Level.findOrCreate({
-          where: { level },
+      for (const levelData of levels) {
+        const [level] = await Level.findOrCreate({
+          where: { level: levelData.level },
+          defaults: {
+            hp: levelData.hp,
+          },
         });
-        await pokemon.$add("levels", lvl);
+        await pokemon.$add("levels", level);
       }
     }
 
     if (skills && skills.length > 0) {
       for (const skill of skills) {
-        await Skill.create({ name: skill, pokemonId: pokemon.id });
+        await Skill.create({
+          name: skill.name,
+          score: skill.score,
+          pokemonId: pokemon.id,
+        });
       }
     }
     return pokemon;
@@ -99,9 +106,12 @@ export const updatePokemon = async (
 
   if (levels) {
     const newLevels = await Promise.all(
-      levels.map(async (levelNumber) => {
+      levels.map(async (levelData) => {
         const [level] = await Level.findOrCreate({
-          where: { level: levelNumber },
+          where: { level: levelData.level },
+          defaults: {
+            hp: levelData.hp,
+          },
         });
         return level;
       }),
@@ -112,8 +122,12 @@ export const updatePokemon = async (
   if (skills) {
     await Skill.destroy({ where: { pokemonId: pokemon.id } });
     await Promise.all(
-      skills.map(async (skillName) => {
-        await Skill.create({ name: skillName, pokemonId: pokemon.id });
+      skills.map(async (skill) => {
+        await Skill.create({
+          name: skill.name,
+          score: skill.score,
+          pokemonId: pokemon.id,
+        });
       }),
     );
   }
