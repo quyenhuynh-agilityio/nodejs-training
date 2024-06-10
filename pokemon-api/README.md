@@ -10,7 +10,7 @@
 
 ## TIMELINE
 
-- 9 days
+- 7 days
 
 ## TASK MANAGEMENT
 
