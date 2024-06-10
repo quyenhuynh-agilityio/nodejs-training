@@ -127,7 +127,7 @@ export const updatePokemon = async (
         await Skill.create({
           name: skill.name,
           score: skill.score,
-          plus: skill.plus,
+          plus: skill.plus || false,
           pokemonId: pokemon.id,
         });
       }),
