@@ -22,7 +22,8 @@ export const createAPokemon = async (
   const payload = req.body;
 
   try {
-    const result = createPokemon(payload);
+    const result = await createPokemon(payload);
+
     // Return result create pokemon item
     res.status(RESPONSE_STATUS.CREATED).json(result);
   } catch (error) {

@@ -26,7 +26,7 @@ export const getPokemonById = async (pokemonId: number) => {
   return pokemon;
 };
 
-export const createPokemon = async (payload?: PokemonTypes) => {
+export const createPokemon = async (payload: PokemonTypes) => {
   if (!payload) {
     // Return error if not have payload
     throw {
@@ -70,7 +70,12 @@ export const createPokemon = async (payload?: PokemonTypes) => {
         });
       }
     }
-    return pokemon;
+
+    // Fetch the pokemon with associated types, levels, and skills
+    const result = await Pokemon.findByPk(pokemon.id, {
+      include: [Type, Level, Skill],
+    });
+    return result;
   }
 };
 
@@ -88,52 +93,57 @@ export const updatePokemon = async (
       status: RESPONSE_STATUS.INVALID_PARAM,
       errorCode: ERR_CODES.EC_BAD_REQUEST,
     };
-  }
+  } else {
+    pokemon.name = name;
+    await pokemon.save();
 
-  pokemon.name = name;
-  await pokemon.save();
+    if (types) {
+      const newTypes = await Promise.all(
+        types.map(async (typeName) => {
+          const [type] = await Type.findOrCreate({
+            where: { name: typeName },
+          });
+          return type;
+        }),
+      );
+      await pokemon.$set("types", newTypes);
+    }
 
-  if (types) {
-    const newTypes = await Promise.all(
-      types.map(async (typeName) => {
-        const [type] = await Type.findOrCreate({
-          where: { name: typeName },
-        });
-        return type;
-      }),
-    );
-    await pokemon.$set("types", newTypes);
-  }
+    if (levels) {
+      const newLevels = await Promise.all(
+        levels.map(async (levelData) => {
+          const [level] = await Level.findOrCreate({
+            where: { level: levelData.level },
+            defaults: {
+              hp: levelData.hp,
+            },
+          });
+          return level;
+        }),
+      );
+      await pokemon.$set("levels", newLevels);
+    }
 
-  if (levels) {
-    const newLevels = await Promise.all(
-      levels.map(async (levelData) => {
-        const [level] = await Level.findOrCreate({
-          where: { level: levelData.level },
-          defaults: {
-            hp: levelData.hp,
-          },
-        });
-        return level;
-      }),
-    );
-    await pokemon.$set("levels", newLevels);
+    if (skills) {
+      await Skill.destroy({ where: { pokemonId: pokemon.id } });
+      await Promise.all(
+        skills.map(async (skill) => {
+          await Skill.create({
+            name: skill.name,
+            score: skill.score,
+            plus: skill.plus || false,
+            pokemonId: pokemon.id,
+          });
+        }),
+      );
+    }
+    // Fetch the pokemon with associated types, levels, and skills
+    const result = await Pokemon.findByPk(pokemon.id, {
+      include: [Type, Level, Skill],
+    });
+    // @ts-ignore: Unreachable code error
+    return result;
   }
-
-  if (skills) {
-    await Skill.destroy({ where: { pokemonId: pokemon.id } });
-    await Promise.all(
-      skills.map(async (skill) => {
-        await Skill.create({
-          name: skill.name,
-          score: skill.score,
-          plus: skill.plus || false,
-          pokemonId: pokemon.id,
-        });
-      }),
-    );
-  }
-  return pokemon;
 };
 
 export const deletePokemon = async (pokemonId: string): Promise<number> => {
