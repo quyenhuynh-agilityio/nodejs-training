@@ -2,7 +2,7 @@ import express from "express";
 import bodyParser from "body-parser";
 
 // Database configs
-import { sequelize } from "./configs/database";
+import { sequelize } from "./config/database";
 
 // Routes
 import { PokemonRoute } from "./routes/pokemon";

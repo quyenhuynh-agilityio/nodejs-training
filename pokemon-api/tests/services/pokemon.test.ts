@@ -1,5 +1,5 @@
 import { Pokemon } from "../../src/models/pokemon";
-import { sequelize } from "../../src/configs/database";
+import { sequelize } from "../../src/config/database";
 import {
   createPokemon,
   deletePokemon,
