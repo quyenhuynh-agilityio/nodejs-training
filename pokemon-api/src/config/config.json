@@ -1,7 +1,11 @@
 {
   "development": {
     "dialect": "sqlite",
-    "storage": "./database.sqlite"
+    "storage": "./database.sqlite",
+    "migrationStorage": "json",
+    "migrationStoragePath": "sequelizeMeta.json",
+    "seederStorage": "json",
+    "seederStoragePath": "sequelizeData.json"
   },
   "test": {
     "dialect": "sqlite",
