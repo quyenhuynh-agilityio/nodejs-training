@@ -19,6 +19,7 @@ module.exports = {
         {
           id: 6,
           name: "Pokemon",
+          tag: "basic",
         },
       ],
       {},
