@@ -10,8 +10,26 @@ module.exports = {
      * await queryInterface.createTable('users', { id: Sequelize.INTEGER });
      */
     await queryInterface.createTable("pokemon_levels", {
-      pokemonId: Sequelize.INTEGER,
-      levelId: Sequelize.INTEGER,
+      pokemonId: {
+        type: Sequelize.INTEGER,
+        references: {
+          model: "pokemons",
+          key: "id",
+        },
+        onUpdate: "CASCADE",
+        onDelete: "CASCADE",
+        allowNull: false,
+      },
+      levelId: {
+        type: Sequelize.INTEGER,
+        references: {
+          model: "levels",
+          key: "id",
+        },
+        onUpdate: "CASCADE",
+        onDelete: "CASCADE",
+        allowNull: false,
+      },
     });
   },
 

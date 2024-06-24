@@ -10,10 +10,34 @@ module.exports = {
      * await queryInterface.createTable('users', { id: Sequelize.INTEGER });
      */
     await queryInterface.createTable("skills", {
-      id: Sequelize.INTEGER,
-      name: Sequelize.STRING,
-      score: Sequelize.STRING,
-      plus: Sequelize.STRING,
+      id: {
+        type: Sequelize.INTEGER,
+        autoIncrement: true,
+        primaryKey: true,
+        allowNull: false,
+      },
+      name: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
+      score: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
+      plus: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
+      pokemonId: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        references: {
+          model: "pokemons",
+          key: "id",
+        },
+        onUpdate: "CASCADE",
+        onDelete: "CASCADE",
+      },
     });
   },
 

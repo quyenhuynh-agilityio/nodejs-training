@@ -10,9 +10,20 @@ module.exports = {
      * await queryInterface.createTable('users', { id: Sequelize.INTEGER });
      */
     await queryInterface.createTable("levels", {
-      id: Sequelize.INTEGER,
-      level: Sequelize.STRING,
-      hp: Sequelize.NUMBER,
+      id: {
+        type: Sequelize.INTEGER,
+        autoIncrement: true,
+        primaryKey: true,
+        allowNull: false,
+      },
+      level: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+      },
+      hp: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+      },
     });
   },
 

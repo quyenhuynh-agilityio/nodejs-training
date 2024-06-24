@@ -13,7 +13,7 @@ module.exports = {
      * }], {});
      */
     await queryInterface.bulkInsert(
-      "Skills",
+      "skills",
       [
         {
           id: 14,
@@ -31,8 +31,8 @@ module.exports = {
      * Add commands to revert seed here.
      *
      * Example:
-     * await queryInterface.bulkDelete('Skills', null, {});
+     * await queryInterface.bulkDelete('skills', null, {});
      */
-    await queryInterface.bulkDelete("Skills", null, {});
+    await queryInterface.bulkDelete("skills", null, {});
   },
 };

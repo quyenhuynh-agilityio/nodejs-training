@@ -13,7 +13,7 @@ module.exports = {
      * }], {});
      */
     await queryInterface.bulkInsert(
-      "Levels",
+      "levels",
       [
         {
           id: 1,
@@ -32,6 +32,6 @@ module.exports = {
      * Example:
      * await queryInterface.bulkDelete('People', null, {});
      */
-    await queryInterface.bulkDelete("Levels", null, {});
+    await queryInterface.bulkDelete("levels", null, {});
   },
 };

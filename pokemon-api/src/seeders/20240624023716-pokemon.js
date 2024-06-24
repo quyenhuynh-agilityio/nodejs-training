@@ -14,7 +14,7 @@ module.exports = {
      */
 
     await queryInterface.bulkInsert(
-      "Pokemons",
+      "pokemons",
       [
         {
           id: 6,
@@ -32,6 +32,6 @@ module.exports = {
      * Example:
      * await queryInterface.bulkDelete('People', null, {});
      */
-    await queryInterface.bulkDelete("Pokemons", null, {});
+    await queryInterface.bulkDelete("pokemons", null, {});
   },
 };

@@ -10,8 +10,26 @@ module.exports = {
      * await queryInterface.createTable('pokemon_types', { id: Sequelize.INTEGER });
      */
     await queryInterface.createTable("pokemon_types", {
-      pokemonId: Sequelize.INTEGER,
-      typeId: Sequelize.INTEGER,
+      pokemonId: {
+        type: Sequelize.INTEGER,
+        references: {
+          model: "pokemons",
+          key: "id",
+        },
+        onUpdate: "CASCADE",
+        onDelete: "CASCADE",
+        allowNull: false,
+      },
+      typeId: {
+        type: Sequelize.INTEGER,
+        references: {
+          model: "types",
+          key: "id",
+        },
+        onUpdate: "CASCADE",
+        onDelete: "CASCADE",
+        allowNull: false,
+      },
     });
   },
 
