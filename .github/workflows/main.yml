@@ -17,18 +17,17 @@ jobs:
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
       - name: Build and test
-        working-directory: ./docker-nodejs-sample
-        run: docker build . -t docker-nodejs -f Dockerfile
         uses: docker/build-push-action@v6
         with:
+          context: ./docker-nodejs-sample
           target: test
+          push: true
           load: true
       - name: Build and push
-        working-directory: ./docker-nodejs-sample
-        run: docker build . -t docker-nodejs -f Dockerfile
         uses: docker/build-push-action@v6
         with:
           platforms: linux/amd64,linux/arm64/v8
+          context: ./docker-nodejs-sample
           push: true
           target: prod
           tags: ${{ vars.DOCKER_USERNAME }}/${{ github.event.repository.name }}:latest
