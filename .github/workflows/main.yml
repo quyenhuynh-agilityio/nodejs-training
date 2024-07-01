@@ -19,6 +19,8 @@ jobs:
       - name: Build and test
         uses: docker/build-push-action@v6
         with:
+          context: ./docker-nodejs-sample
+          file: ./docker-nodejs-sample/Dockerfile
           target: test
           load: true
       - name: Build and push
@@ -26,7 +28,7 @@ jobs:
         with:
           platforms: linux/amd64,linux/arm64/v8
           context: ./docker-nodejs-sample
-            file: ./docker-nodejs-sample/Dockerfile
+          file: ./docker-nodejs-sample/Dockerfile
           push: true
           target: prod
           tags: ${{ vars.DOCKER_USERNAME }}/${{ github.event.repository.name }}:latest
